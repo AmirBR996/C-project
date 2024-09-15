@@ -386,23 +386,17 @@ void Bank::send_money(){
 
 
     while(readFile >> name >> acc_number >> balance >> email >> num >> address >> pass){
-        if(transfer_amount > balance){
-        cout<<"insufficient balance."<<endl;
-        }
-        else{
-        if(acc_number == this->getAccountNumber()){
+      if(acc_number == this->getAccountNumber()){
             balance -= transfer_amount;
             recipient_found = true;
         }
         writeFile << name << " " << acc_number << " " << balance << "  " << email <<  " " << num << " " << address << " " <<
         pass << endl;
     }
-    }
+    
     
     writeFile.close();
     readFile.close();
-    remove("bank.txt");
-    rename("temp.txt", "bank.txt");
      if (sender_found && recipient_found) {
          cout << "\t\t\tTransfer successful! :)" << endl;
      } else if (!sender_found) {
